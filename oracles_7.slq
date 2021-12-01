@@ -1,17 +1,24 @@
 import utils;
 import scs;
-import oracles_5;
+import oracles_6;
 
 def U_7_3(q_0:B, q_1:B, q_2:B, q_3:B, q_4:B, q_5:B, q_6:B)mfree{
     (q_5, q_6) := scs_2(1,7,q_5, q_6);
     (q_4, q_5, q_6) := scs_3(2,7, q_4, q_5, q_6);
     (q_3, q_4, q_6) := scs_3(3,7,q_3, q_4, q_6);
 
-    (q_4, q_5) := scs_2(1,6, q_4, q_5);
-    (q_3, q_4, q_5) := scs_3(2,6,q_3, q_4, q_5);
-    (q_2, q_3, q_5) := scs_3(3,6,q_2, q_3, q_5);
+    (q_0, q_1, q_2, q_3, q_4, q_5) := U_6_3(q_0, q_1, q_2, q_3, q_4, q_5);
 
-    (q_0, q_1, q_2, q_3, q_4) := U_5_3(q_0, q_1, q_2, q_3, q_4);
+    return (q_0, q_1, q_2, q_3, q_4, q_5, q_6);
+}
+
+def U_7_4(q_0:B, q_1:B, q_2:B, q_3:B, q_4:B, q_5:B, q_6:B)mfree{
+    (q_5, q_6) := scs_2(1,7,q_5, q_6);
+    (q_4, q_5, q_6) := scs_3(2,7, q_4, q_5, q_6);
+    (q_3, q_4, q_6) := scs_3(3,7,q_3, q_4, q_6);
+    (q_2, q_3, q_6) := scs_3(4,7,q_2, q_3, q_6);
+    
+    (q_0, q_1, q_2, q_3, q_4, q_5) := U_6_4(q_0, q_1, q_2, q_3, q_4, q_5);
 
     return (q_0, q_1, q_2, q_3, q_4, q_5, q_6);
 }
