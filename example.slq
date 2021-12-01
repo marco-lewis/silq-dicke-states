@@ -4,6 +4,7 @@ import scs;
 n := 5;
 k := 3;
 
+// Ideally what the algorithm should look like
 def main(){
     q := 0:uint[n];
     for i in [n-k..n){ q[i] = 1:B; }

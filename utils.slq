@@ -1,3 +1,4 @@
+// sqrt(l/n)-gate
 def l_n_gate(l:!N, n:!N, q:B)mfree{
     q := rotY(2 * acos(sqrt(l/n)), q);
     return q;
@@ -6,4 +7,18 @@ def l_n_gate(l:!N, n:!N, q:B)mfree{
 def cnot(const c:B, t:B)mfree{
     if c{ t := X(t); }
     return t;
+}
+
+// Orders an array of bits (of length n) for nice trace
+def order_arb[n:!N](q:B[]){
+    for i in [0..n){
+        q[i] := X(X(q[i]));
+    }
+    return q;
+}
+
+// For a bit array of size n, performs X on the final k qubits
+def X_end[n:!N, k:!N](q:B[])qfree{
+    for i in [n-k..n){ q[i] := X(q[i]); }
+    return q;
 }
