@@ -1,0 +1,15 @@
+import utils;
+import scs;
+
+n := 5;
+k := 3;
+
+def main(){
+    q := 0:uint[n];
+    for i in [n-k..n){ q[i] = 1:B; }
+
+    dump();
+    q := split_cycle_shift(5, 3, q);
+    dump();
+    measure(q);
+}

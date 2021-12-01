@@ -1,0 +1,45 @@
+import utils;
+
+// def U[n:!N, k:!N, reg_size:!N](q:uint[reg_size]){
+//     if n == 2{
+//         q := split_cycle_shift[reg_size](2, 1, q);
+//     }
+//     else{
+//         q := split_cycle_shift(n, k, q);
+//         q := U[n-1, k, reg_size](q);
+//     }
+//     return q;
+// }
+
+def split_cycle_shift[reg_size:!N](c:!N, K:!N, q:uint[reg_size]){
+    (q[K-2], q[K-1]) := scs_2(1, K, q[K-2], q[K-1]);
+    t := 0;
+
+    while t <= c - 2{
+        // Can do with defined indices
+        // (q[3], q[4], q[5]) := scs_3(t, K, q[3], q[4], q[5]);
+        // Can't do below as indicies may be the same
+        // (q[K-3-t], q[K-2-t], q[K-1]) := scs_3(t, K, q[K-3-t], q[K-2-t], q[K-1]);
+        t = t + 1;
+    }
+
+    return q;
+}
+
+def scs_2(const l:!N, const n:!N, a:B, b:B)mfree{
+    b := cnot(a, b);
+    if b {
+        a := l_n_gate(l, n, a);
+    }
+    b := cnot(a, b);
+    return (a, b);
+}
+
+def scs_3(const l:!N,const n:!N, a:B, b:B, c:B)mfree{
+    c := cnot(a, c);
+    if b & c {
+        a := l_n_gate(l, n, a);
+    }
+    c := cnot(a, c);
+    return (a,b,c);
+}

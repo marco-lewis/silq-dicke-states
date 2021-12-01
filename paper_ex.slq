@@ -1,0 +1,84 @@
+import oracles_5;
+import oracles_7;
+
+// Calls qubits in order so appears neat on trace
+def order(q_0:B, q_1:B, q_2:B, q_3:B, q_4:B)qfree{
+    q_0 := X(X(q_0));
+    q_1 := X(X(q_1));
+    q_2 := X(X(q_2));
+    q_3 := X(X(q_3));
+    q_4 := X(X(q_4));
+    return (q_0, q_1,q_2,q_3,q_4);
+}
+
+def order_arb[n:!N](q:B[]){
+    for i in [0..n){
+        q[i] := X(X(q[i]));
+    }
+    return q;
+}
+
+def X_end(q_0:B, q_1:B, q_2:B, q_3:B, q_4:B)qfree{
+    q_2 := X(q_2);
+    q_3 := X(q_3);
+    q_4 := X(q_4);
+    return (q_0, q_1,q_2,q_3,q_4);
+}
+
+def ex_7(){
+    q_0 := 0:B;
+    q_1 := 0:B;
+    q_2 := 0:B;
+    q_3 := 0:B;
+    q_4 := 1:B;
+    q_5 := 1:B;
+    q_6 := 1:B;
+
+    dump();
+
+    (q_0,q_1,q_2,q_3,q_4,q_5,q_6) := U_7_3(q_0,q_1,q_2,q_3,q_4,q_5,q_6);
+
+    // Perform oracle-like operation?
+
+    (q_0,q_1,q_2,q_3,q_4,q_5,q_6) := order_arb[7](q_0,q_1,q_2,q_3,q_4,q_5,q_6);
+
+    dump();
+    
+    (q_0,q_1,q_2,q_3,q_4,q_5,q_6) := reverse(U_7_3)(q_0,q_1,q_2,q_3,q_4,q_5,q_6);
+
+    (q_0,q_1,q_2,q_3,q_4,q_5,q_6) := order_arb[7](q_0,q_1,q_2,q_3,q_4,q_5,q_6);
+
+    dump();
+    q := measure(q_0, q_1, q_2, q_3, q_4,q_5,q_6);
+    return q;
+}
+
+
+def ex_5(){
+    q_0 := 0:B;
+    q_1 := 0:B;
+    q_2 := 0:B;
+    q_3 := 1:B;
+    q_4 := 1:B;
+
+    dump();
+
+    (q_0,q_1,q_2,q_3,q_4) := U_5_2(q_0,q_1,q_2,q_3,q_4);
+
+    // Perform oracle-like operation?
+
+    (q_0,q_1,q_2,q_3,q_4) := order(q_0,q_1,q_2,q_3,q_4);
+    dump();
+    
+    (q_0,q_1,q_2,q_3,q_4) := reverse(U_5_2)(q_0,q_1,q_2,q_3,q_4);
+    
+    (q_0,q_1,q_2,q_3,q_4) := order(q_0,q_1,q_2,q_3,q_4);
+
+    dump();
+    q := measure(q_0, q_1, q_2, q_3, q_4);
+    return q;
+}
+
+def main(){
+    return ex_7();
+}

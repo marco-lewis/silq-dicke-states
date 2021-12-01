@@ -1,0 +1,9 @@
+def l_n_gate(l:!N, n:!N, q:B)mfree{
+    q := rotY(2 * acos(sqrt(l/n)), q);
+    return q;
+}
+
+def cnot(const c:B, t:B)mfree{
+    if c{ t := X(t); }
+    return t;
+}
